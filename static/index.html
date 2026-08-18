@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meeting Transcript Generator</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <aside class="panel controls-panel">
+          <div class="brand-row">
+            <div>
+              <h1>Meeting Transcript Generator</h1>
+              <p>Upload a recording and generate a downloadable transcript.</p>
+            </div>
+          </div>
+
+          <form id="uploadForm" class="upload-form">
+            <label class="drop-zone" for="fileInput">
+              <input id="fileInput" name="file" type="file" accept="audio/*,video/*" required />
+              <span class="drop-icon">↑</span>
+              <span class="drop-title">Choose recording</span>
+              <span id="fileName" class="drop-meta">MP4, MP3, WAV, M4A, WEBM, MOV</span>
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>Whisper model</span>
+                <select id="modelInput" name="model">
+                  <option value="base" selected>base</option>
+                  <option value="tiny">tiny</option>
+                  <option value="small">small</option>
+                  <option value="medium">medium</option>
+                  <option value="large">large</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Language</span>
+                <input id="languageInput" name="language" value="en" placeholder="en" />
+              </label>
+            </div>
+
+            <label class="toggle-row">
+              <input id="speakersInput" name="speakers" type="checkbox" checked />
+              <span>Detect speakers</span>
+            </label>
+
+            <label>
+              <span>Speaker names</span>
+              <input
+                id="speakerNamesInput"
+                name="speaker_names"
+                placeholder="Swamy,Rakesh,Sadik"
+              />
+            </label>
+
+            <button id="submitButton" type="submit">Generate transcript</button>
+          </form>
+        </aside>
+
+        <section class="panel results-panel">
+          <div class="results-header">
+            <div>
+              <h2>Transcript</h2>
+              <p id="statusText">No upload yet.</p>
+            </div>
+            <a id="downloadLink" class="download-link hidden" href="#">Download</a>
+          </div>
+
+          <pre id="transcriptOutput" class="transcript-output">Upload a meeting recording to begin.</pre>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
