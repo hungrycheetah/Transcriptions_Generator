@@ -58,3 +58,26 @@ http://127.0.0.1:8000
 - Set `HF_TOKEN` in the host's environment/secrets settings.
 - CPU diarization is slow. Longer recordings can take several minutes.
 - Uploaded recordings and transcripts are stored under `app_data/`. On ephemeral hosts, files disappear after restart unless persistent disk is configured.
+
+## Azure Container Apps
+
+Recommended settings:
+
+```text
+Ingress: External
+Target port: 8000
+CPU / memory: 2 CPU / 4 GiB minimum, 4 CPU / 8 GiB preferred
+Min replicas: 1
+Max replicas: 1
+```
+
+Environment variables:
+
+```text
+HF_TOKEN=hf_your_hugging_face_token
+TRANSCRIBE_WORKERS=1
+TRANSCRIBE_TIMEOUT_SECONDS=7200
+PYTHONUNBUFFERED=1
+```
+
+Use the GitHub repository deployment flow and select this repository as the source. Azure will build the included `Dockerfile`.
